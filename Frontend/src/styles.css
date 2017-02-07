@@ -1,0 +1,105 @@
+.head_style
+{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin-left: -6%;
+    margin-right: -6%;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.mainlogin-bg
+{
+    background-color: #b1b6bf;
+    height: 500px;
+}
+
+.main-bg
+{
+    background-color: #b1b6bf
+}
+
+.aligner
+{
+    display: inline !important;
+    width: 100%;
+}
+
+.valueLabel
+{
+    font-size: 20px;
+    color: #fff;
+    margin-top: 10%;
+}
+
+.form_style{
+    align-items: center;
+    margin-top: 10 px;
+    height: 400px;
+    text-align: center;
+    border-radius: 2px solid;
+    box-sizing: border-box;
+    border: 3px solid #ccc;
+    width: 70%;
+    padding: 50px 25px;
+    margin: 8px 0;
+    box-shadow: 2px 4px 8px #888888;
+    float: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto !important;
+    background-color: #c1c1c1;
+}
+.form-group{
+margin-bottom: 1%;
+margin-top: 1%;
+margin-right: 0%;
+
+}
+.button_style
+{
+    margin-top: 1%;
+    border-radius: 1px;
+    width: 100%;
+    border-radius: 2px;
+}
+
+.btns {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 33%;
+    position: relative;
+}
+
+.signout
+{
+    color: #fff;
+}
+
+.btn-holder {
+    display: inline-block;
+    margin: 2.5% 0;
+    margin-top: 1%;
+}
+
+h1{
+    background-color: #2c3e50;
+    color: white;
+    padding-bottom: 3%;
+    padding-top: 3%;
+    margin-top:0%;
+    text-align: center;
+}
+
+footer{
+    background-color: #2c3e50;
+    color: white;
+    padding-bottom: 0.5%;
+    padding-top: 0.5%;
+    text-align: center;
+}
+
+html{
+    background-color: #2c3e50;
+}

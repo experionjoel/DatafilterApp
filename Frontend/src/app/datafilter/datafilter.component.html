@@ -1,0 +1,157 @@
+<div class="row mainlogin-bg">
+
+  <div class="container-fluid">
+  <div class="col-md-12 ">
+    <h3 class=""> Select your filters. </h3>
+  </div>
+  <form  name="form" #f="ngForm" (ngSubmit)= "f.form.valid && FilterData(f.value)" novalidate>
+    <div class="row">
+      <!--Main filterField-->
+      <div class="col-md-4">
+        <select 
+          #FieldName 
+          (change)='SelectedValue = FieldName.value; FetchFieldOperators(FieldName.value); Reset()' class="form-control" 
+          name="FieldName" 
+          [(ngModel)] = "currentFilter.FieldName"
+        > 
+          <option *ngFor="let n of MainFields.details" [value]="n.value"> {{n.name}} </option>
+        </select>
+      </div>
+
+      <!--Sub-filter fields-->
+      <div class="col-md-3">
+
+        <!--Employee Number field-->
+        <div *ngIf="SelectedValue == 'EmployeeNo'">
+          <select #operator (change)='SelectedValueno = operator.value; ' class="form-control" name="Operator" [(ngModel)] = "currentFilter.operator.OperatorSymbol"> 
+                    <option *ngFor="let n of operatorList" [value]="n.OperatorSymbol"> {{n.OperatorSymbol}} </option>
+                </select>
+        </div>
+
+        <!--Employee Name-->
+        <div *ngIf="SelectedValue == 'EmployeeName'">
+          <select #operator (change)='SelectedValuename = operator.value' class="form-control" name="Operator" [(ngModel)] = "currentFilter.operator.OperatorSymbol"> 
+                      <option *ngFor="let n of operatorList" [value]="n.OperatorSymbol"> {{n.OperatorSymbol}} </option>
+                </select>
+        </div>
+
+        <!--Date of Joining-->
+        <div *ngIf="SelectedValue == 'DateOfJoining'">
+          <select #operator (change)='SelectedValuedoj = operator.value' class="form-control" name="Operator" [(ngModel)] = "currentFilter.operator.OperatorSymbol"> 
+                      <option *ngFor="let n of operatorList" [value]="n.OperatorSymbol"> {{n.OperatorSymbol}} </option>
+                </select>
+        </div>
+
+        <!--Designation-->
+        <div *ngIf="SelectedValue == 'Designation'">
+          <select #operator (change)='SelectedValueop = operator.value' class="form-control" required name="Operator" [(ngModel)] = "currentFilter.operator.OperatorSymbol"> 
+                      <option *ngFor="let n of operatorList" [value]="n.OperatorSymbol"> {{n.OperatorSymbol}} </option>
+                </select>
+        </div>
+
+        <!--Band-->
+        <div *ngIf="SelectedValue == 'Band'">
+          <select #operator (change)='SelectedValueband = operator.value' class="form-control" required name="Operator" [(ngModel)] = "currentFilter.operator.OperatorSymbol"> 
+                      <option *ngFor="let n of operatorList" [value]="n.OperatorSymbol"> {{n.OperatorSymbol}} </option><br />
+                </select>
+        </div>
+
+        <div [hidden] = "!(SelectedValuedoj=='BETWEEN')">
+          <div class="row"><br />
+
+          <!--FromDate-->
+            <label class="col-sm-4 control-label">From Date</label>
+            <div class="col-md-3">
+
+              <input 
+                type="date" 
+                #FromDate
+                id="currentFilter.FromDate" 
+                [ngModel]="currentFilter.FromDate | date: y-MM-dd" 
+                (ngModelChange)="currentFilter.FromDate = $event" 
+                name="fromDate"/>
+
+            </div><br /><br />
+
+          <!--ToDate-->
+            <label class="col-sm-4 control-label">To Date</label>
+            <div class="col-md-3">
+              <input 
+                type="date" 
+                #FromDate
+                id="currentFilter.ToDate" 
+                [ngModel]="currentFilter.ToDate | date: y-MM-dd" 
+                (ngModelChange)="currentFilter.ToDate = $event" 
+                name="toDate"/>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-1" *ngIf = "currentFilter.operator.OperatorSymbol != 'BETWEEN'">
+        <label class="control-label pull-right valueLabel" for="value">Value</label>
+      </div>
+
+      <div class="col-md-4" *ngIf = "currentFilter.operator.OperatorSymbol != 'BETWEEN'">
+        <span [hidden] = "!(SelectedValue != 'DateOfJoining')" >
+          <input 
+            #value
+            type="text" 
+            name="value" 
+            class="form-control" 
+            id="value" 
+            [(ngModel)] = "currentFilter.value"
+            placeholder="Enter search value">
+            <br />
+        </span>
+        <!--Condition based field - DateOfJoining-->
+        <span [hidden] = "!(SelectedValue == 'DateOfJoining')" >
+              <input 
+                type="date" 
+                #DateOfJoining
+                class="form-control"
+                id="currentFilter.DateOfJoining" 
+                [ngModel]="currentFilter.FromDate | date:y-MM-dd" 
+                (ngModelChange)="currentFilter.DateOfJoining = $event" 
+                name="DateOfJoining"/>
+        </span>
+      </div>
+    </div>
+
+    <!--The group of buttons that control Clear Filters, Filter and Signout.-->
+    <div class="row">
+      <div class="col-md-12 btn-holder" >
+        <button type="submit" name="filter-submit" id="filter" class="btns btn btn-primary" value="Submit">FILTER</button>
+        <button type="button" class=" btns btn btn-warning" (click)="Reset()">CLEAR FILTERS</button>
+        <a [routerLink]="['/login']" class="btns signout pull-right"><button class=" btns pull-right btn btn-danger"> SIGNOUT </button></a><br />
+      </div>
+    </div>
+  </form>
+
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-bordered">
+          <thead>
+            <th>Employee Number</th>
+            <th>Employee Name</th>
+            <th>Date of Joining</th>
+            <th>Designation</th>
+            <th>Band</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let e of employees">
+              <td>{{e.EmployeeNo}}</td>
+              <td>{{e.EmployeeName}}</td>
+              <td>{{e.DateOfJoining}}</td>
+              <td>{{e.Designation}}</td>
+              <td>{{e.Band}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

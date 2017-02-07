@@ -1,0 +1,33 @@
+-- POSTMAN INPUTS
+http://localhost:52431/api/getEmployeesByCondition
+  {
+  "FieldName": "EmployeeName" ,
+  "OperatorSymbol": "LIKE",
+  "value": "Coco",
+  "DateOfJoining": null,
+  "FromDate": null,
+  "ToDate": null,
+  "operator": {
+  	"OperatorSymbol": "LIKE"
+  }
+  }
+
+  {
+"FieldName": "DateOfJoining" ,
+"OperatorSymbol": "=",
+"value": "2013-10-05T00:00:00.000",
+"DateOfJoining": "2015-10-05T00:00:00.000",
+"FromDate": null,
+"ToDate": null,
+"operator": {
+	"OperatorSymbol": "<"
+}
+}
+
+
+http://localhost:52431/api/getOperators
+{
+  "FieldName":"Designation"
+}
+
+http://localhost:52431/api/getAllEmployees
